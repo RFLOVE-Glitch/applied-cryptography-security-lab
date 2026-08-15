@@ -40,13 +40,13 @@ function Governance() {
       >
         <div className="max-w-3xl">
           <SyntheticNotice>
-            Educational portfolio demonstration. The decision records, cadences and risk items below model a
-            fictional program on synthetic data. The algorithm guidance reflects current public standards
-            guidance, but nothing here constitutes a compliance assessment or a security guarantee.
+            Educational portfolio demonstration. The decision records, cadences and risk items below
+            model a fictional program on synthetic data. The algorithm guidance reflects current
+            public standards guidance, but nothing here constitutes a compliance assessment or a
+            security guarantee.
           </SyntheticNotice>
         </div>
       </PageHeader>
-
 
       <Section
         kicker="Approved catalog"

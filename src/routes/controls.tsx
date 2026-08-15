@@ -76,13 +76,13 @@ function Controls() {
         </div>
         <div className="mt-6 max-w-3xl">
           <SyntheticNotice>
-            Educational portfolio demonstration. These controls, owners, postures and evidence artifacts are
-            invented for illustration, and the framework references are illustrative mappings — not an
-            assessment, certification or statement of compliance for any organisation.
+            Educational portfolio demonstration. These controls, owners, postures and evidence
+            artifacts are invented for illustration, and the framework references are illustrative
+            mappings — not an assessment, certification or statement of compliance for any
+            organisation.
           </SyntheticNotice>
         </div>
       </PageHeader>
-
 
       <Section
         kicker={`${filtered.length} control${filtered.length === 1 ? "" : "s"} shown`}

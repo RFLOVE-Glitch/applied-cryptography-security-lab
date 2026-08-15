@@ -1,8 +1,8 @@
 # Applied Cryptography Security Lab
 
 A portfolio project by **Rachel Love** — a defensive security and solution-architecture
-demonstration of how cryptography is *selected, implemented, governed, rotated, reviewed and
-evidenced* in an enterprise security program.
+demonstration of how cryptography is _selected, implemented, governed, rotated, reviewed and
+evidenced_ in an enterprise security program.
 
 > **This is an educational portfolio demonstration, not production key-management
 > infrastructure.** Every metric, control, key alias, custodian, framework mapping, risk item
@@ -47,16 +47,16 @@ src/
 
 ## What is actually implemented vs. what is described
 
-| Area | Implemented in this repository | Described only (reference design) |
-| --- | --- | --- |
-| Hashing (SHA-256/384/512) | Yes — live, in-browser via Web Crypto | — |
-| HMAC-SHA-256 sign & verify, tamper rejection | Yes — live, in-browser | Constant-time comparison, timestamped replay window, secret-store lookup |
-| AES-256-GCM encryption with AAD binding, fail-closed decrypt | Yes — live, in-browser, ephemeral per-session key | DEK wrapping by a non-exportable KMS/HSM key, DEK cache with TTL |
-| Key inventory, rotation SLAs, custodians | Presented as a static synthetic table | Real KMS inventory, drift detection, automated rotation |
-| Control catalog, framework mapping, evidence artifacts | Written content over synthetic data | Signed attestation packs, auditor evidence, real scanner output |
-| Compromise/revocation drill timings | Illustrative narrative | Executed drills against real infrastructure |
-| Post-quantum readiness (CBOM, hybrid KEM waves) | Roadmap narrative | Any deployed PQC pilot |
-| Backend, database, auth, secrets, telemetry | **None** | — |
+| Area                                                         | Implemented in this repository                    | Described only (reference design)                                        |
+| ------------------------------------------------------------ | ------------------------------------------------- | ------------------------------------------------------------------------ |
+| Hashing (SHA-256/384/512)                                    | Yes — live, in-browser via Web Crypto             | —                                                                        |
+| HMAC-SHA-256 sign & verify, tamper rejection                 | Yes — live, in-browser                            | Constant-time comparison, timestamped replay window, secret-store lookup |
+| AES-256-GCM encryption with AAD binding, fail-closed decrypt | Yes — live, in-browser, ephemeral per-session key | DEK wrapping by a non-exportable KMS/HSM key, DEK cache with TTL         |
+| Key inventory, rotation SLAs, custodians                     | Presented as a static synthetic table             | Real KMS inventory, drift detection, automated rotation                  |
+| Control catalog, framework mapping, evidence artifacts       | Written content over synthetic data               | Signed attestation packs, auditor evidence, real scanner output          |
+| Compromise/revocation drill timings                          | Illustrative narrative                            | Executed drills against real infrastructure                              |
+| Post-quantum readiness (CBOM, hybrid KEM waves)              | Roadmap narrative                                 | Any deployed PQC pilot                                                   |
+| Backend, database, auth, secrets, telemetry                  | **None**                                          | —                                                                        |
 
 The Crypto Lab exports a demo AES key to the screen purely so the mechanism is visible while
 learning. That is the opposite of the pattern the app itself recommends (ADR-023: key material
@@ -64,10 +64,10 @@ stays non-exportable inside the KMS boundary), and the page says so in place.
 
 ## Primitives demonstrated
 
-| Demo | Primitive | Point being made |
-| --- | --- | --- |
-| Digest | SHA-256 / SHA-384 / SHA-512 | Avalanche property; a hash can safely *name* an artifact but never provides confidentiality |
-| Webhook integrity | HMAC-SHA-256 | Shared-secret authenticity + integrity; edit the received body and the check must reject it |
+| Demo                | Primitive                                      | Point being made                                                                                                                |
+| ------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Digest              | SHA-256 / SHA-384 / SHA-512                    | Avalanche property; a hash can safely _name_ an artifact but never provides confidentiality                                     |
+| Webhook integrity   | HMAC-SHA-256                                   | Shared-secret authenticity + integrity; edit the received body and the check must reject it                                     |
 | Envelope encryption | AES-256-GCM with additional authenticated data | Per-record data key, 96-bit nonce discipline, and context binding that makes a record-swap attempt a hard cryptographic failure |
 
 All inputs are synthetic placeholders. Keys are generated locally per session and are never
