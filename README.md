@@ -1,5 +1,9 @@
 # Applied Cryptography Security Lab
 
+🌐 **Live Demo:** [Launch the Applied Cryptography Security Lab](https://applied-cryptography-security-lab.lovable.app)
+
+🌐 **Portfolio:** [rachellove.tech](https://rachellove.tech)
+
 A portfolio project by **Rachel Love** — a defensive security and solution-architecture
 demonstration of how cryptography is _selected, implemented, governed, rotated, reviewed and
 evidenced_ in an enterprise security program.
