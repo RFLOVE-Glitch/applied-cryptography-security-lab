@@ -25,7 +25,14 @@ export const Route = createFileRoute("/controls")({
   component: Controls,
 });
 
-const domains = ["All", "Data at rest", "Data in transit", "Key management", "Identity & integrity", "Application"] as const;
+const domains = [
+  "All",
+  "Data at rest",
+  "Data in transit",
+  "Key management",
+  "Identity & integrity",
+  "Application",
+] as const;
 
 function Controls() {
   const [domain, setDomain] = useState<(typeof domains)[number]>("All");
@@ -104,7 +111,9 @@ function Controls() {
                 </div>
                 <div>
                   <dt className="label-mono">Evidence artifact</dt>
-                  <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">{c.evidence}</dd>
+                  <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    {c.evidence}
+                  </dd>
                 </div>
               </dl>
             </Panel>

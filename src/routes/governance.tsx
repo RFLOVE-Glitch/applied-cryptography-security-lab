@@ -60,7 +60,9 @@ function Governance() {
                   <td className="px-5 py-4 text-xs text-foreground">{a.use}</td>
                   <td className="px-5 py-4 font-mono text-xs text-success">{a.approved}</td>
                   <td className="px-5 py-4 font-mono text-xs text-destructive">{a.deprecated}</td>
-                  <td className="px-5 py-4 text-xs leading-relaxed text-muted-foreground">{a.why}</td>
+                  <td className="px-5 py-4 text-xs leading-relaxed text-muted-foreground">
+                    {a.why}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -125,11 +127,16 @@ function Governance() {
               </thead>
               <tbody>
                 {reviewCadence.map((r) => (
-                  <tr key={r.activity} className="border-b border-border/60 last:border-0 align-top">
+                  <tr
+                    key={r.activity}
+                    className="border-b border-border/60 last:border-0 align-top"
+                  >
                     <td className="px-5 py-4 font-mono text-xs text-primary">{r.cadence}</td>
                     <td className="px-5 py-4 text-xs text-foreground">
                       {r.activity}
-                      <span className="mt-1 block text-[11px] text-muted-foreground">{r.owner}</span>
+                      <span className="mt-1 block text-[11px] text-muted-foreground">
+                        {r.owner}
+                      </span>
                     </td>
                     <td className="px-5 py-4 text-xs text-muted-foreground">{r.output}</td>
                   </tr>
@@ -140,8 +147,8 @@ function Governance() {
           <Panel>
             <h3 className="text-base font-semibold">Evidence pack contents</h3>
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-              What an auditor or enterprise customer actually receives each quarter, assembled from artifacts
-              the controls already generate rather than written from scratch.
+              What an auditor or enterprise customer actually receives each quarter, assembled from
+              artifacts the controls already generate rather than written from scratch.
             </p>
             <ul className="mt-4 space-y-2.5 text-xs text-muted-foreground">
               {[

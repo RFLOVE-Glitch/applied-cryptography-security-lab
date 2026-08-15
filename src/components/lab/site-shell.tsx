@@ -25,7 +25,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
               <span className="block text-sm font-semibold tracking-tight">
                 Applied Cryptography Security Lab
               </span>
-              <span className="label-mono block">Rachel Love · Security &amp; Cloud Architecture</span>
+              <span className="label-mono block">
+                Rachel Love · Security &amp; Cloud Architecture
+              </span>
             </span>
           </Link>
 
@@ -79,22 +81,23 @@ export function SiteShell({ children }: { children: ReactNode }) {
             <p className="label-mono">Portfolio project</p>
             <p className="mt-2 text-foreground">Applied Cryptography Security Lab</p>
             <p className="mt-1">
-              Designed and documented by Rachel Love as a defensive security and solution-architecture
-              demonstration.
+              Designed and documented by Rachel Love as a defensive security and
+              solution-architecture demonstration.
             </p>
           </div>
           <div>
             <p className="label-mono">Data notice</p>
             <p className="mt-2">
-              Every metric, key alias, control, and finding shown here is synthetic and generated for
-              demonstration. No production systems, real key material, or customer data are involved.
+              Every metric, key alias, control, and finding shown here is synthetic and generated
+              for demonstration. No production systems, real key material, or customer data are
+              involved.
             </p>
           </div>
           <div>
             <p className="label-mono">Scope</p>
             <p className="mt-2">
-              Defensive only: control design, key governance, algorithm selection, and evidence. The Crypto
-              Lab runs standard browser WebCrypto primitives locally in your own tab.
+              Defensive only: control design, key governance, algorithm selection, and evidence. The
+              Crypto Lab runs standard browser WebCrypto primitives locally in your own tab.
             </p>
           </div>
         </div>

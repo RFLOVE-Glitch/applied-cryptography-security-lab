@@ -104,12 +104,9 @@
   --sidebar-border: oklch(0.3 0.03 252);
   --sidebar-ring: oklch(0.79 0.14 195);
 
-  --gradient-signal: linear-gradient(
-    135deg,
-    oklch(0.79 0.14 195) 0%,
-    oklch(0.72 0.15 300) 100%
-  );
-  --gradient-shell: radial-gradient(
+  --gradient-signal: linear-gradient(135deg, oklch(0.79 0.14 195) 0%, oklch(0.72 0.15 300) 100%);
+  --gradient-shell:
+    radial-gradient(
       1100px 520px at 12% -10%,
       color-mix(in oklab, oklch(0.79 0.14 195) 16%, transparent) 0%,
       transparent 70%
@@ -120,7 +117,8 @@
       transparent 72%
     );
   --shadow-panel: 0 24px 60px -30px oklch(0.1 0.03 250 / 0.9);
-  --shadow-glow: 0 0 0 1px color-mix(in oklab, oklch(0.79 0.14 195) 30%, transparent),
+  --shadow-glow:
+    0 0 0 1px color-mix(in oklab, oklch(0.79 0.14 195) 30%, transparent),
     0 18px 50px -24px color-mix(in oklab, oklch(0.79 0.14 195) 55%, transparent);
 }
 
@@ -172,7 +170,15 @@
 
 @utility grid-lines {
   background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--border) 60%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--border) 60%, transparent) 1px,
+      transparent 1px
+    );
   background-size: 44px 44px;
 }

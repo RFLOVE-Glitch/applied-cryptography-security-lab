@@ -41,7 +41,11 @@ export const architecturePillars = [
     title: "Selection",
     summary:
       "Cipher suites are chosen from an approved catalog tied to data classification, latency budget, and regulator expectations — never by developer preference.",
-    artifacts: ["Approved algorithm catalog", "Data classification matrix", "Exception request form"],
+    artifacts: [
+      "Approved algorithm catalog",
+      "Data classification matrix",
+      "Exception request form",
+    ],
   },
   {
     title: "Implementation",
@@ -66,7 +70,8 @@ export const architecturePillars = [
 export type Control = {
   id: string;
   name: string;
-  domain: "Data at rest" | "Data in transit" | "Key management" | "Identity & integrity" | "Application";
+  domain:
+    "Data at rest" | "Data in transit" | "Key management" | "Identity & integrity" | "Application";
   objective: string;
   implementation: string;
   algorithm: string;
@@ -81,20 +86,23 @@ export const controls: Control[] = [
     id: "CR-01",
     name: "Envelope encryption for tenant data",
     domain: "Data at rest",
-    objective: "Confidential tenant records remain unreadable if storage media or a database snapshot is exposed.",
+    objective:
+      "Confidential tenant records remain unreadable if storage media or a database snapshot is exposed.",
     implementation:
       "Per-tenant data encryption key wrapped by a regional KMS customer master key. DEKs cached in memory for 5 minutes, never persisted in plaintext.",
     algorithm: "AES-256-GCM (DEK) / KMS-wrapped CMK",
     owner: "Platform Data Services",
     frameworks: ["ISO 27001 A.8.24", "NIST SP 800-57", "PCI DSS 3.5"],
     posture: "healthy",
-    evidence: "Synthetic KMS key policy export + unit test proving ciphertext rejection on tampered AAD.",
+    evidence:
+      "Synthetic KMS key policy export + unit test proving ciphertext rejection on tampered AAD.",
   },
   {
     id: "CR-02",
     name: "Field-level encryption for regulated attributes",
     domain: "Data at rest",
-    objective: "National ID and payment attributes are protected even from operators with database read access.",
+    objective:
+      "National ID and payment attributes are protected even from operators with database read access.",
     implementation:
       "Deterministic encryption only where equality search is required; randomized AES-GCM elsewhere. Column allow-list enforced in schema review.",
     algorithm: "AES-256-GCM / AES-256-SIV",
@@ -127,7 +135,8 @@ export const controls: Control[] = [
     owner: "Security Engineering",
     frameworks: ["NIST SP 800-57 Pt.1", "SOC 2 CC6.1"],
     posture: "healthy",
-    evidence: "Redacted drill log: 11 minutes from revocation to full re-wrap of 4,200 synthetic DEKs.",
+    evidence:
+      "Redacted drill log: 11 minutes from revocation to full re-wrap of 4,200 synthetic DEKs.",
   },
   {
     id: "CR-05",
@@ -283,37 +292,44 @@ export const keyInventory: KeyRecord[] = [
 export const lifecycleStages = [
   {
     stage: "Plan",
-    detail: "Classify the data, pick from the approved catalog, record the intended key lifetime and blast radius.",
+    detail:
+      "Classify the data, pick from the approved catalog, record the intended key lifetime and blast radius.",
     controlIds: ["CR-01", "CR-09"],
   },
   {
     stage: "Generate",
-    detail: "Keys are created inside the HSM-backed KMS. No key material exists outside a validated boundary.",
+    detail:
+      "Keys are created inside the HSM-backed KMS. No key material exists outside a validated boundary.",
     controlIds: ["CR-04"],
   },
   {
     stage: "Distribute",
-    detail: "Workloads receive short-lived grants via workload identity; no static secrets in code or images.",
+    detail:
+      "Workloads receive short-lived grants via workload identity; no static secrets in code or images.",
     controlIds: ["CR-03", "CR-05"],
   },
   {
     stage: "Use",
-    detail: "All crypto calls go through the shared SDK, which enforces AAD, nonce discipline, and audit logging.",
+    detail:
+      "All crypto calls go through the shared SDK, which enforces AAD, nonce discipline, and audit logging.",
     controlIds: ["CR-01", "CR-08"],
   },
   {
     stage: "Rotate",
-    detail: "Dual-version aliases allow zero-downtime re-wrapping. Overdue keys raise an automatic risk item.",
+    detail:
+      "Dual-version aliases allow zero-downtime re-wrapping. Overdue keys raise an automatic risk item.",
     controlIds: ["CR-04"],
   },
   {
     stage: "Revoke",
-    detail: "Compromise playbook disables the key, re-wraps dependents, and files an incident record with timings.",
+    detail:
+      "Compromise playbook disables the key, re-wraps dependents, and files an incident record with timings.",
     controlIds: ["CR-04", "CR-05"],
   },
   {
     stage: "Destroy",
-    detail: "Scheduled deletion after retention proof; crypto-shredding evidence attached to the data disposal record.",
+    detail:
+      "Scheduled deletion after retention proof; crypto-shredding evidence attached to the data disposal record.",
     controlIds: ["CR-01"],
   },
 ];
@@ -334,7 +350,8 @@ export const decisionRecords = [
     id: "ADR-018",
     title: "Argon2id replaces bcrypt for credential hashing",
     status: "Accepted",
-    context: "bcrypt cost factor had not been revisited in four years and offers no memory hardness.",
+    context:
+      "bcrypt cost factor had not been revisited in four years and offers no memory hardness.",
     decision: "Argon2id with tuned memory cost; transparent upgrade-on-login for existing hashes.",
     consequence: "Higher memory per auth request; auth tier capacity plan updated and load-tested.",
   },
@@ -353,8 +370,10 @@ export const decisionRecords = [
     id: "ADR-023",
     title: "No application-managed key material",
     status: "Accepted",
-    context: "Two teams had proposed loading private keys from environment variables for latency reasons.",
-    decision: "All private keys stay non-exportable in KMS/HSM; latency addressed with DEK caching, not key export.",
+    context:
+      "Two teams had proposed loading private keys from environment variables for latency reasons.",
+    decision:
+      "All private keys stay non-exportable in KMS/HSM; latency addressed with DEK caching, not key export.",
     consequence: "A cache invalidation path is required, and cache TTL is capped at 5 minutes.",
   },
 ];
@@ -452,7 +471,8 @@ export const riskRegister = [
     title: "Legacy partner endpoints negotiate TLS 1.2",
     severity: "Medium",
     controlId: "CR-03",
-    treatment: "Partner migration campaign with a hard cutoff date and documented exception until then.",
+    treatment:
+      "Partner migration campaign with a hard cutoff date and documented exception until then.",
     owner: "Cloud Network Engineering",
     due: "Wave 2",
   },
@@ -461,7 +481,8 @@ export const riskRegister = [
     title: "RSA-2048 protecting data with 10-year retention",
     severity: "High",
     controlId: "CR-09",
-    treatment: "Hybrid PQC key exchange on ingress, then re-encrypt archives under PQC-safe wrapping.",
+    treatment:
+      "Hybrid PQC key exchange on ingress, then re-encrypt archives under PQC-safe wrapping.",
     owner: "Security Architecture",
     due: "Wave 3",
   },
@@ -479,5 +500,8 @@ export const riskRegister = [
 export const postureCopy: Record<Posture, { label: string; className: string }> = {
   healthy: { label: "Effective", className: "border-success/40 bg-success/10 text-success" },
   watch: { label: "Monitoring", className: "border-warning/40 bg-warning/10 text-warning" },
-  gap: { label: "Gap / roadmap", className: "border-destructive/40 bg-destructive/10 text-destructive" },
+  gap: {
+    label: "Gap / roadmap",
+    className: "border-destructive/40 bg-destructive/10 text-destructive",
+  },
 };

@@ -1,7 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Boxes, FileCheck2, KeyRound, Radar } from "lucide-react";
 
-import { PageHeader, Panel, PostureBadge, Section, SyntheticNotice, Chip } from "@/components/lab/primitives";
+import {
+  PageHeader,
+  Panel,
+  PostureBadge,
+  Section,
+  SyntheticNotice,
+  Chip,
+} from "@/components/lab/primitives";
 import { architecturePillars, programMetrics, controls, riskRegister } from "@/lib/lab-data";
 
 export const Route = createFileRoute("/")({
@@ -75,8 +82,8 @@ function Overview() {
         </div>
         <div className="mt-6 max-w-3xl">
           <SyntheticNotice>
-            All figures below are synthetic and locally generated for demonstration. Nothing in this project
-            reads from, connects to, or represents a real environment.
+            All figures below are synthetic and locally generated for demonstration. Nothing in this
+            project reads from, connects to, or represents a real environment.
           </SyntheticNotice>
         </div>
       </PageHeader>
@@ -180,8 +187,9 @@ function Overview() {
               ))}
             </ul>
             <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-              Coverage is deliberately uneven: key management and application integrity carry the most
-              controls because they are where mistakes are cheapest to make and most expensive to detect.
+              Coverage is deliberately uneven: key management and application integrity carry the
+              most controls because they are where mistakes are cheapest to make and most expensive
+              to detect.
             </p>
           </Panel>
           <Panel>
@@ -214,12 +222,17 @@ function Overview() {
       <Section kicker="Walkthrough" title="Where to go next" className="border-t border-border/70">
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {quickLinks.map((q) => (
-            <Link key={q.to} to={q.to} className="panel group flex flex-col gap-3 p-6 transition-colors hover:bg-surface-raised">
+            <Link
+              key={q.to}
+              to={q.to}
+              className="panel group flex flex-col gap-3 p-6 transition-colors hover:bg-surface-raised"
+            >
               <q.icon className="size-5 text-primary" />
               <h3 className="text-base font-semibold">{q.title}</h3>
               <p className="text-xs leading-relaxed text-muted-foreground">{q.body}</p>
               <span className="mt-auto inline-flex items-center gap-1.5 font-mono text-xs text-primary">
-                Open <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                Open{" "}
+                <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
           ))}

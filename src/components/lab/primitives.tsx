@@ -43,7 +43,9 @@ export function Section({
       {kicker ? <p className="label-mono">{kicker}</p> : null}
       <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">{title}</h2>
       {description ? (
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{description}</p>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          {description}
+        </p>
       ) : null}
       <div className="mt-8">{children}</div>
     </section>
