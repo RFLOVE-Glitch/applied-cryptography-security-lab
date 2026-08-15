@@ -82,8 +82,10 @@ function Overview() {
         </div>
         <div className="mt-6 max-w-3xl">
           <SyntheticNotice>
-            All figures below are synthetic and locally generated for demonstration. Nothing in this
-            project reads from, connects to, or represents a real environment.
+            Educational portfolio demonstration — not production key-management infrastructure. All figures
+            are synthetic and locally generated. This app has no backend, no KMS and no connection to any
+            real environment, and it makes no compliance or security guarantee about any real system.
+
           </SyntheticNotice>
         </div>
       </PageHeader>
