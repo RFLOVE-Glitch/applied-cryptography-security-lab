@@ -27,7 +27,10 @@ export const Route = createFileRoute("/key-lifecycle")({
 const statusStyle: Record<KeyRecord["status"], { label: string; className: string }> = {
   "in-sla": { label: "In SLA", className: "border-success/40 bg-success/10 text-success" },
   "due-soon": { label: "Due soon", className: "border-warning/40 bg-warning/10 text-warning" },
-  overdue: { label: "Overdue", className: "border-destructive/40 bg-destructive/10 text-destructive" },
+  overdue: {
+    label: "Overdue",
+    className: "border-destructive/40 bg-destructive/10 text-destructive",
+  },
 };
 
 function KeyLifecycle() {
@@ -64,7 +67,9 @@ function KeyLifecycle() {
           {lifecycleStages.map((s, i) => (
             <Panel key={s.stage} className="flex flex-col gap-3 p-5">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs text-primary">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-xs text-primary">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <h3 className="text-base font-semibold">{s.stage}</h3>
               </div>
               <p className="text-xs leading-relaxed text-muted-foreground">{s.detail}</p>
@@ -109,7 +114,9 @@ function KeyLifecycle() {
                         {k.scope}
                       </span>
                     </td>
-                    <td className="px-5 py-4 font-mono text-xs text-muted-foreground">{k.algorithm}</td>
+                    <td className="px-5 py-4 font-mono text-xs text-muted-foreground">
+                      {k.algorithm}
+                    </td>
                     <td className="px-5 py-4 text-xs text-muted-foreground">{k.custodian}</td>
                     <td className="px-5 py-4">
                       <span className="font-mono text-xs text-foreground">
@@ -147,8 +154,8 @@ function KeyLifecycle() {
         </Panel>
         <div className="mt-6 max-w-3xl">
           <SyntheticNotice>
-            Aliases, ages and custodians are invented for this demonstration. No key material, KMS account,
-            or partner relationship shown here exists.
+            Aliases, ages and custodians are invented for this demonstration. No key material, KMS
+            account, or partner relationship shown here exists.
           </SyntheticNotice>
         </div>
       </Section>
@@ -180,7 +187,10 @@ t5  disable v1, retain for audit window, then schedule deletion`}</pre>
                 ["T+2 min", "Grants revoked; workloads fail closed on that key and alert."],
                 ["T+4 min", "New CMK generated in HSM; alias repointed for encrypt operations."],
                 ["T+11 min", "4,200 synthetic DEKs re-wrapped; decrypt-only on old key disabled."],
-                ["T+1 day", "Incident record filed with timings; runbook gaps become backlog items."],
+                [
+                  "T+1 day",
+                  "Incident record filed with timings; runbook gaps become backlog items.",
+                ],
               ].map(([t, body]) => (
                 <li key={t} className="flex gap-3">
                   <span className="w-20 shrink-0 font-mono text-xs text-primary">{t}</span>
@@ -189,8 +199,8 @@ t5  disable v1, retain for audit window, then schedule deletion`}</pre>
               ))}
             </ol>
             <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-              The drill exists to produce a measured number. &ldquo;We can revoke a key&rdquo; is a claim;
-              &ldquo;11 minutes, evidenced twice a year&rdquo; is a control.
+              The drill exists to produce a measured number. &ldquo;We can revoke a key&rdquo; is a
+              claim; &ldquo;11 minutes, evidenced twice a year&rdquo; is a control.
             </p>
           </Panel>
         </div>

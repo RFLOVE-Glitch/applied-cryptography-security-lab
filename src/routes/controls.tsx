@@ -1,7 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
-import { Chip, PageHeader, Panel, PostureBadge, Section } from "@/components/lab/primitives";
+import {
+  Chip,
+  PageHeader,
+  Panel,
+  PostureBadge,
+  Section,
+  SyntheticNotice,
+} from "@/components/lab/primitives";
+
 import { controls } from "@/lib/lab-data";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +33,14 @@ export const Route = createFileRoute("/controls")({
   component: Controls,
 });
 
-const domains = ["All", "Data at rest", "Data in transit", "Key management", "Identity & integrity", "Application"] as const;
+const domains = [
+  "All",
+  "Data at rest",
+  "Data in transit",
+  "Key management",
+  "Identity & integrity",
+  "Application",
+] as const;
 
 function Controls() {
   const [domain, setDomain] = useState<(typeof domains)[number]>("All");
@@ -58,6 +73,14 @@ function Controls() {
               {d}
             </button>
           ))}
+        </div>
+        <div className="mt-6 max-w-3xl">
+          <SyntheticNotice>
+            Educational portfolio demonstration. These controls, owners, postures and evidence
+            artifacts are invented for illustration, and the framework references are illustrative
+            mappings — not an assessment, certification or statement of compliance for any
+            organisation.
+          </SyntheticNotice>
         </div>
       </PageHeader>
 
@@ -104,7 +127,9 @@ function Controls() {
                 </div>
                 <div>
                   <dt className="label-mono">Evidence artifact</dt>
-                  <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">{c.evidence}</dd>
+                  <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    {c.evidence}
+                  </dd>
                 </div>
               </dl>
             </Panel>

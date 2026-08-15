@@ -70,7 +70,9 @@ function Output({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-lg border border-border/70 bg-background/50 p-4">
       <p className="label-mono">{label}</p>
-      <p className="mt-2 break-all font-mono text-xs leading-relaxed text-primary">{value || "—"}</p>
+      <p className="mt-2 break-all font-mono text-xs leading-relaxed text-primary">
+        {value || "—"}
+      </p>
     </div>
   );
 }
@@ -95,9 +97,11 @@ function DigestDemo() {
       <div>
         <h3 className="text-base font-semibold">1 · Digest &amp; the avalanche property</h3>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-          Change a single character below. The digest changes completely — that is what lets a hash safely
-          name an artifact, a container image, or an audit record. It is also why hashes alone are
-          <span className="text-foreground"> not</span> encryption and never protect confidentiality.
+          Change a single character below. The digest changes completely — that is what lets a hash
+          safely name an artifact, a container image, or an audit record. It is also why hashes
+          alone are
+          <span className="text-foreground"> not</span> encryption and never protect
+          confidentiality.
         </p>
       </div>
       <Field label="Synthetic record" value={text} onChange={setText} />
@@ -120,8 +124,9 @@ function DigestDemo() {
       </div>
       <Output label={`${algo} digest (hex)`} value={digest} />
       <p className="font-mono text-[11px] leading-relaxed text-muted-foreground">
-        Control link: CR-07 signs SHA-256 digests of build artifacts. MD5 and SHA-1 are prohibited in the
-        approved catalog because collision resistance is a prerequisite wherever a hash authorises something.
+        Control link: CR-07 signs SHA-256 digests of build artifacts. MD5 and SHA-1 are prohibited
+        in the approved catalog because collision resistance is a prerequisite wherever a hash
+        authorises something.
       </p>
     </Panel>
   );
@@ -129,7 +134,9 @@ function DigestDemo() {
 
 function HmacDemo() {
   const [secret, setSecret] = useState("whsec_synthetic_demo_partner_acme");
-  const [payload, setPayload] = useState('{"event":"payment.settled","amount":1420.00,"id":"evt_9f21"}');
+  const [payload, setPayload] = useState(
+    '{"event":"payment.settled","amount":1420.00,"id":"evt_9f21"}',
+  );
   const [signature, setSignature] = useState("");
   const [tampered, setTampered] = useState("");
   const [verdict, setVerdict] = useState<null | { ok: boolean; note: string }>(null);
@@ -179,9 +186,9 @@ function HmacDemo() {
       <div>
         <h3 className="text-base font-semibold">2 · HMAC webhook integrity (CR-08)</h3>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-          A shared secret proves the message came from the partner and was not modified. Sign the payload,
-          then edit the received body and verify — this is exactly the check that stops forged callbacks from
-          moving money.
+          A shared secret proves the message came from the partner and was not modified. Sign the
+          payload, then edit the received body and verify — this is exactly the check that stops
+          forged callbacks from moving money.
         </p>
       </div>
       <Field label="Partner secret (synthetic)" value={secret} onChange={setSecret} mono />
@@ -194,7 +201,12 @@ function HmacDemo() {
         <RefreshCw className="size-4" /> Sign payload
       </button>
       <Output label="HMAC-SHA-256 signature header" value={signature} />
-      <Field label="Body as received (edit me to simulate tampering)" value={tampered} onChange={setTampered} mono />
+      <Field
+        label="Body as received (edit me to simulate tampering)"
+        value={tampered}
+        onChange={setTampered}
+        mono
+      />
       <button
         type="button"
         onClick={() => void verify()}
@@ -211,20 +223,27 @@ function HmacDemo() {
               : "border-destructive/40 bg-destructive/10 text-destructive",
           )}
         >
-          {verdict.ok ? <Check className="mt-0.5 size-4 shrink-0" /> : <X className="mt-0.5 size-4 shrink-0" />}
+          {verdict.ok ? (
+            <Check className="mt-0.5 size-4 shrink-0" />
+          ) : (
+            <X className="mt-0.5 size-4 shrink-0" />
+          )}
           <span>{verdict.note}</span>
         </div>
       ) : null}
       <p className="font-mono text-[11px] leading-relaxed text-muted-foreground">
-        Production requirements beyond this demo: constant-time comparison, a timestamp inside the signed
-        material, a replay window (5 minutes), and per-partner secrets held in the secret store with rotation.
+        Production requirements beyond this demo: constant-time comparison, a timestamp inside the
+        signed material, a replay window (5 minutes), and per-partner secrets held in the secret
+        store with rotation.
       </p>
     </Panel>
   );
 }
 
 function EnvelopeDemo() {
-  const [plaintext, setPlaintext] = useState("national_id=SYN-4410-9922 · classification=confidential");
+  const [plaintext, setPlaintext] = useState(
+    "national_id=SYN-4410-9922 · classification=confidential",
+  );
   const [aad, setAad] = useState("tenant=acme-synthetic|record=cust_8812");
   const [state, setState] = useState<null | {
     dekB64: string;
@@ -284,15 +303,23 @@ function EnvelopeDemo() {
   return (
     <Panel className="flex flex-col gap-5">
       <div>
-        <h3 className="text-base font-semibold">3 · AES-256-GCM envelope encryption (CR-01, CR-02)</h3>
+        <h3 className="text-base font-semibold">
+          3 · AES-256-GCM envelope encryption (CR-01, CR-02)
+        </h3>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-          A fresh data encryption key is generated per record and, in the real architecture, immediately
-          wrapped by a non-exportable KMS key. The additional authenticated data binds the ciphertext to its
-          tenant and record id — change it on decrypt and the whole operation fails closed.
+          A fresh data encryption key is generated per record and, in the real architecture,
+          immediately wrapped by a non-exportable KMS key. The additional authenticated data binds
+          the ciphertext to its tenant and record id — change it on decrypt and the whole operation
+          fails closed.
         </p>
       </div>
       <Field label="Synthetic confidential field" value={plaintext} onChange={setPlaintext} />
-      <Field label="Additional authenticated data (binding context)" value={aad} onChange={setAad} mono />
+      <Field
+        label="Additional authenticated data (binding context)"
+        value={aad}
+        onChange={setAad}
+        mono
+      />
       <button
         type="button"
         onClick={() => void encrypt()}
@@ -335,14 +362,17 @@ function EnvelopeDemo() {
               ) : (
                 <ShieldAlert className="mt-0.5 size-4 shrink-0" />
               )}
-              <span className="font-mono">{result.ok ? `Recovered: ${result.note}` : result.note}</span>
+              <span className="font-mono">
+                {result.ok ? `Recovered: ${result.note}` : result.note}
+              </span>
             </div>
           ) : null}
         </>
       ) : null}
       <p className="font-mono text-[11px] leading-relaxed text-muted-foreground">
-        The DEK is displayed here only because this is a teaching demo running in your own tab. In the
-        reference architecture (ADR-023) key material is never exportable and never leaves the KMS boundary.
+        The DEK is displayed here only because this is a teaching demo running in your own tab. In
+        the reference architecture (ADR-023) key material is never exportable and never leaves the
+        KMS boundary.
       </p>
     </Panel>
   );
@@ -358,8 +388,9 @@ function Playground() {
       >
         <div className="max-w-3xl">
           <SyntheticNotice>
-            Defensive demonstration only. All inputs are synthetic placeholders and all keys are generated
-            locally per session. Do not paste real secrets, credentials, or personal data into these fields.
+            Defensive demonstration only. All inputs are synthetic placeholders and all keys are
+            generated locally per session. Do not paste real secrets, credentials, or personal data
+            into these fields.
           </SyntheticNotice>
         </div>
       </PageHeader>
