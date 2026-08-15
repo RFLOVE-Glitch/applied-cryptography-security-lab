@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ControlsRouteImport } from './routes/controls'
+import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as KeyLifecycleRouteImport } from './routes/key-lifecycle'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +24,49 @@ const ControlsRoute = ControlsRouteImport.update({
   path: '/controls',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GovernanceRoute = GovernanceRouteImport.update({
+  id: '/governance',
+  path: '/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KeyLifecycleRoute = KeyLifecycleRouteImport.update({
+  id: '/key-lifecycle',
+  path: '/key-lifecycle',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/controls': typeof ControlsRoute
+  '/governance': typeof GovernanceRoute
+  '/key-lifecycle': typeof KeyLifecycleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/controls': typeof ControlsRoute
+  '/governance': typeof GovernanceRoute
+  '/key-lifecycle': typeof KeyLifecycleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/controls': typeof ControlsRoute
+  '/governance': typeof GovernanceRoute
+  '/key-lifecycle': typeof KeyLifecycleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/controls'
+  fullPaths: '/' | '/controls' | '/governance' | '/key-lifecycle'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/controls'
-  id: '__root__' | '/' | '/controls'
+  to: '/' | '/controls' | '/governance' | '/key-lifecycle'
+  id: '__root__' | '/' | '/controls' | '/governance' | '/key-lifecycle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ControlsRoute: typeof ControlsRoute
+  GovernanceRoute: typeof GovernanceRoute
+  KeyLifecycleRoute: typeof KeyLifecycleRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +85,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ControlsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/governance': {
+      id: '/governance'
+      path: '/governance'
+      fullPath: '/governance'
+      preLoaderRoute: typeof GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/key-lifecycle': {
+      id: '/key-lifecycle'
+      path: '/key-lifecycle'
+      fullPath: '/key-lifecycle'
+      preLoaderRoute: typeof KeyLifecycleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ControlsRoute: ControlsRoute,
+  GovernanceRoute: GovernanceRoute,
+  KeyLifecycleRoute: KeyLifecycleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
