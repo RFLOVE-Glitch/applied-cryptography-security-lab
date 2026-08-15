@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { Chip, PageHeader, Panel, Section } from "@/components/lab/primitives";
+import { Chip, PageHeader, Panel, Section, SyntheticNotice } from "@/components/lab/primitives";
 import { algorithmCatalog, decisionRecords, reviewCadence, riskRegister } from "@/lib/lab-data";
 import { cn } from "@/lib/utils";
 
@@ -37,7 +37,16 @@ function Governance() {
         eyebrow="Governance"
         title="Decisions with recorded consequences, reviewed on a cadence, sequenced by risk."
         intro="Governance is where a cryptography program either compounds or decays. This page shows the four artifacts that keep it compounding: an approved algorithm catalog with an explicit deprecation list, decision records that admit their trade-offs, a review calendar, and a risk register that turns findings into dated waves of work."
-      />
+      >
+        <div className="max-w-3xl">
+          <SyntheticNotice>
+            Educational portfolio demonstration. The decision records, cadences and risk items below model a
+            fictional program on synthetic data. The algorithm guidance reflects current public standards
+            guidance, but nothing here constitutes a compliance assessment or a security guarantee.
+          </SyntheticNotice>
+        </div>
+      </PageHeader>
+
 
       <Section
         kicker="Approved catalog"
