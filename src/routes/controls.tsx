@@ -22,7 +22,7 @@ export const Route = createFileRoute("/controls")({
       },
     ],
   }),
-  component: Controls;
+  component: Controls,
 });
 
 const domains = ["All", "Data at rest", "Data in transit", "Key management", "Identity & integrity", "Application"] as const;
