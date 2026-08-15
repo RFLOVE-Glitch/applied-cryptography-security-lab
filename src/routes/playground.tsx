@@ -231,7 +231,7 @@ function EnvelopeDemo() {
     ivHex: string;
     ciphertext: string;
     key: CryptoKey;
-    iv: Uint8Array;
+    iv: Uint8Array<ArrayBuffer>;
     aadUsed: string;
   }>(null);
   const [decryptAad, setDecryptAad] = useState(aad);

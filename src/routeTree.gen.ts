@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ControlsRouteImport } from './routes/controls'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as KeyLifecycleRouteImport } from './routes/key-lifecycle'
+import { Route as PlaygroundRouteImport } from './routes/playground'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const KeyLifecycleRoute = KeyLifecycleRouteImport.update({
   path: '/key-lifecycle',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlaygroundRoute = PlaygroundRouteImport.update({
+  id: '/playground',
+  path: '/playground',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/controls': typeof ControlsRoute
   '/governance': typeof GovernanceRoute
   '/key-lifecycle': typeof KeyLifecycleRoute
+  '/playground': typeof PlaygroundRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/controls': typeof ControlsRoute
   '/governance': typeof GovernanceRoute
   '/key-lifecycle': typeof KeyLifecycleRoute
+  '/playground': typeof PlaygroundRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,21 @@ export interface FileRoutesById {
   '/controls': typeof ControlsRoute
   '/governance': typeof GovernanceRoute
   '/key-lifecycle': typeof KeyLifecycleRoute
+  '/playground': typeof PlaygroundRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/controls' | '/governance' | '/key-lifecycle'
+  fullPaths:
+    '/' | '/controls' | '/governance' | '/key-lifecycle' | '/playground'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/controls' | '/governance' | '/key-lifecycle'
-  id: '__root__' | '/' | '/controls' | '/governance' | '/key-lifecycle'
+  to: '/' | '/controls' | '/governance' | '/key-lifecycle' | '/playground'
+  id:
+    | '__root__'
+    | '/'
+    | '/controls'
+    | '/governance'
+    | '/key-lifecycle'
+    | '/playground'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +83,7 @@ export interface RootRouteChildren {
   ControlsRoute: typeof ControlsRoute
   GovernanceRoute: typeof GovernanceRoute
   KeyLifecycleRoute: typeof KeyLifecycleRoute
+  PlaygroundRoute: typeof PlaygroundRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KeyLifecycleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/playground': {
+      id: '/playground'
+      path: '/playground'
+      fullPath: '/playground'
+      preLoaderRoute: typeof PlaygroundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +131,7 @@ const rootRouteChildren: RootRouteChildren = {
   ControlsRoute: ControlsRoute,
   GovernanceRoute: GovernanceRoute,
   KeyLifecycleRoute: KeyLifecycleRoute,
+  PlaygroundRoute: PlaygroundRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
